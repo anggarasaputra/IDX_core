@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'd3a0666508620e23e26e3069a72a153985356587',
+        'reference' => 'f1064cc0154441f38b47c976d341d5aa4eead2fe',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -379,7 +379,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'd3a0666508620e23e26e3069a72a153985356587',
+            'reference' => 'f1064cc0154441f38b47c976d341d5aa4eead2fe',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(
@@ -667,8 +667,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -829,6 +829,15 @@
             'aliases' => array(),
             'reference' => '99732be0ddb3361e16ad77b68ba41efc8e979019',
             'dev_requirement' => true,
+        ),
+        'spatie/laravel-activitylog' => array(
+            'pretty_version' => '3.17.0',
+            'version' => '3.17.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-activitylog',
+            'aliases' => array(),
+            'reference' => 'bdc44862aaca39ecbd824133b80dbd7c8017ed7f',
+            'dev_requirement' => false,
         ),
         'spatie/laravel-permission' => array(
             'pretty_version' => '3.18.0',
