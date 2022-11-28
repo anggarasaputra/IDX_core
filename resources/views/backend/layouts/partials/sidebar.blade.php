@@ -59,6 +59,23 @@
                     </li>
                     @endif
 
+                    @if ($usr->can('hakaksions.create') || $usr->can('hakaksions.view') ||  $usr->can('hakaksions.edit') ||  $usr->can('hakaksions.delete'))
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-user"></i><span>
+                            Permission
+                        </span></a>
+                        <ul class="collapse {{ Route::is('admin.hakaksions.create') || Route::is('admin.hakaksions.index') || Route::is('admin.hakaksions.edit') || Route::is('admin.hakaksions.show') ? 'in' : '' }}">
+                            
+                            @if ($usr->can('admin.view'))
+                                <li class="{{ Route::is('admin.hakaksions.index')  || Route::is('admin.hakaksions.edit') ? 'active' : '' }}"><a href="{{ route('admin.hakaksions.index') }}">All Permission</a></li>
+                            @endif
+
+                            @if ($usr->can('admin.create'))
+                                <li class="{{ Route::is('admin.hakaksions.create')  ? 'active' : '' }}"><a href="{{ route('admin.hakaksions.create') }}">Create Permission</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    @endif
                 </ul>
             </nav>
         </div>

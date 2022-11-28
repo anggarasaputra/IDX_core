@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('roles', 'Backend\RolesController', ['names' => 'admin.roles']);
     Route::resource('users', 'Backend\UsersController', ['names' => 'admin.users']);
     Route::resource('admins', 'Backend\AdminsController', ['names' => 'admin.admins']);
+    Route::resource('hakakses', 'Backend\HakaksionsController', ['names' => 'admin.hakaksions']);
 
 
     // Login Routes

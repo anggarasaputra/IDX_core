@@ -21,6 +21,7 @@ return array(
     'App\\Http\\Controllers\\Backend\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Backend/Auth/LoginController.php',
     'App\\Http\\Controllers\\Backend\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Backend/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Backend\\DashboardController' => $baseDir . '/app/Http/Controllers/Backend/DashboardController.php',
+    'App\\Http\\Controllers\\Backend\\HakaksionsController' => $baseDir . '/app/Http/Controllers/Backend/HakaksionsController.php',
     'App\\Http\\Controllers\\Backend\\RolesController' => $baseDir . '/app/Http/Controllers/Backend/RolesController.php',
     'App\\Http\\Controllers\\Backend\\UsersController' => $baseDir . '/app/Http/Controllers/Backend/UsersController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
