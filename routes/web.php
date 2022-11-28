@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('users', 'Backend\UsersController', ['names' => 'admin.users']);
     Route::resource('admins', 'Backend\AdminsController', ['names' => 'admin.admins']);
     Route::resource('hakakses', 'Backend\HakaksionsController', ['names' => 'admin.hakaksions']);
-
+    Route::resource('gallery', 'Backend\GalleryController', ['names' => 'admin.gallery']);
 
     // Login Routes
     Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('admin.login');

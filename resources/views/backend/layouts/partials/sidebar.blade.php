@@ -76,6 +76,22 @@
                         </ul>
                     </li>
                     @endif
+
+                    @if ($usr->can('gallery.create') || $usr->can('gallery.view') ||  $usr->can('gallery.edit') ||  $usr->can('gallery.delete'))
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-tasks"></i><span>
+                            Gallery
+                        </span></a>
+                        <ul class="collapse {{ Route::is('admin.gallery.create') || Route::is('admin.gallery.index') || Route::is('admin.gallery.edit') || Route::is('admin.gallery.show') ? 'in' : '' }}">
+                            @if ($usr->can('gallery.view'))
+                                <li class="{{ Route::is('admin.gallery.index')  || Route::is('admin.gallery.edit') ? 'active' : '' }}"><a href="{{ route('admin.gallery.index') }}">All Gallery</a></li>
+                            @endif
+                            @if ($usr->can('gallery.create'))
+                                <li class="{{ Route::is('admin.gallery.create')  ? 'active' : '' }}"><a href="{{ route('admin.gallery.create') }}">Create Gallery</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    @endif
                 </ul>
             </nav>
         </div>

@@ -85,6 +85,16 @@ class RolePermissionSeeder extends Seeder
                     'profile.edit',
                 ]
             ],
+            [
+                'group_name' => 'gallery',
+                'permissions' => [
+                    // gallery Permissions
+                    'gallery.create',
+                    'gallery.view',
+                    'gallery.edit',
+                    'gallery.delete',
+                ]
+            ],
         ];
 
 
