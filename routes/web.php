@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@redirectAdmin')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/cheked/qrcode', 'CheckedController@index')->name('cheked.qrcode');
 
 /**
  * Admin routes

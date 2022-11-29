@@ -31,15 +31,34 @@ class DashboardController extends Controller
         $total_roles = count(Role::select('id')->get());
         $total_admins = count(Admin::select('id')->get());
         $total_permissions = count(Permission::select('id')->get());
-        return view('backend.pages.dashboard.index', compact('total_admins', 'total_roles', 'total_permissions'));
+
+        $qrcode_url = $this->createUrl();
+        return view('backend.pages.dashboard.index', compact('total_admins', 'total_roles', 'total_permissions', 'qrcode_url'));
     }
 
     public function qrcode(Request $request)
     {
         if (isset($request->url)) {
-            session()->flash('success', 'QR Code: ' . $request->url);
+            parse_str(parse_url($request->url, PHP_URL_QUERY), $query);
+            $id = $query['token'];
+            $decrypted = base64_decode(urldecode($id));
+            session()->flash('success', 'QR Code: ' . $request->url . ' Kode Ruang: ' . $decrypted);
             return redirect()->back();
         }
+    }
+
+    public function createUrl()
+    {
+        $id = rand(1, 100);
+        $type = (['G', 'M'])[rand(0, 1)];
+        $kode_ruang = $type . '|' . $id;
+        $encryptId = urlencode(base64_encode($kode_ruang));
+        $url = route('cheked.qrcode') . '?token=' . $encryptId;
+
+        return [
+            'kode_ruang' => $kode_ruang,
+            'url' => $url,
+        ];
     }
 
     public function event(Request $request)

@@ -88,6 +88,25 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 mt-5 mb-3">
+                <div class="card card-bordered">
+                    <div class="card-header">
+                        <h3>Download QR Code Ruang Meeting</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="seo-fact sbg4">
+                            <div class="p-4 d-flex justify-content-between align-items-center">
+                                <div class="seofct-icon"><i class="fa fa-list-alt"></i> Kode Ruang</div>
+                            <h2>{{ $qrcode_url['kode_ruang'] }}</h2>
+                            </div>
+                        </div>
+                        <a href="https://chart.googleapis.com/chart?chs=450x450&cht=qr&chl={{ $qrcode_url['url'] }}&chld=Q" download="qrcode-{{ $qrcode_url['kode_ruang'] }}.jpg" target="_blank">
+                        <img src="https://chart.googleapis.com/chart?chs=450x450&cht=qr&chl={{ $qrcode_url['url'] }}&chld=Q"
+                            alt="QR code">
+                        </a>
+                    </div>
+                </div>
+            </div>
             {{-- Untuk Plugins Fullcalendar --}}
             <div class="col-md-12 mt-5 mb-3">
                 <div class="card card-bordered">
