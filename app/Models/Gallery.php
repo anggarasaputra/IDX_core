@@ -68,4 +68,9 @@ class Gallery extends Model
 			self::IS_DELETED => 1,
 		]);
 	}
+
+	public function getDescriptionForEvent(string $eventName): string
+    {
+        return "This model has been {$eventName}";
+    }
 }

@@ -50,7 +50,7 @@ Permission Page - Admin Panel
                                 <tr>
                                     <th width="5%">Id</th>
                                     <th width="10%">Log Name</th>
-                                    <th width="60%">Deskripsi</th>
+                                    <th width="10%">Deskripsi</th>
                                     <th width="15%">Created At</th>
                                 </tr>
                             </thead>
