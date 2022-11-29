@@ -64,7 +64,7 @@ class GalleryController extends Controller
         }
 
         // Validation Data
-        $request->validate(Gallery::$rules);
+        $request->validate(Gallery::$rules_create);
 
         // Get Image File
         $gambar_path = '';
@@ -132,7 +132,7 @@ class GalleryController extends Controller
         }
 
         // Validation Data
-        $request->validate(Gallery::$rules);
+        $request->validate(Gallery::$rules_update);
 
         $gallery = Gallery::findOrFail($id);
 

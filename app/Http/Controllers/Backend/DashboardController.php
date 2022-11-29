@@ -33,4 +33,43 @@ class DashboardController extends Controller
         $total_permissions = count(Permission::select('id')->get());
         return view('backend.pages.dashboard.index', compact('total_admins', 'total_roles', 'total_permissions'));
     }
+
+    public function qrcode(Request $request)
+    {
+        if (isset($request->url)) {
+            session()->flash('success', 'QR Code: ' . $request->url);
+            return redirect()->back();
+        }
+    }
+
+    public function event(Request $request)
+    {
+        $room_id = $request->room_id;
+        $start = date('Y-m-d H:i:s', strtotime($request->start));
+        $end = date('Y-m-d H:i:s', strtotime($request->end));;
+        $events = [
+            [
+                'title' => 'Makan Siang',
+                'start' => '2022-11-03 13:00:00',
+                'end' => '2022-11-03 14:00:00',
+            ],
+            [
+                'title' => 'Rapat',
+                'start' => '2022-11-13 11:00:00',
+                'end' => '2022-11-13 12:00:00',
+            ],
+            [
+                'title' => 'Kumpulan',
+                'start' => '2022-11-18 11:00:00',
+                'end' => '2022-11-20 11:00:00'
+            ],
+            [
+                'title' => 'Pesta',
+                'start' => '2022-11-29 20:00:00',
+                'end' => '2022-11-29 22:00:00'
+            ],
+        ];
+
+        return response()->json($events);
+    }
 }

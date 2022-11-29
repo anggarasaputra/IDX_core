@@ -9,8 +9,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Gallery extends Model
 {
-	use LogsActivity;
-	use SoftDeletes;
+	use LogsActivity, SoftDeletes;
 
 	const TABLE_NAME   = 'gallery';
 	const ID           = 'id';
@@ -28,12 +27,20 @@ class Gallery extends Model
 	const IS_DELETED   = 'is_deleted';
 	const FETCH_LIMIT  = 10;
 
-	public static $rules = [
+	public static $rules_create = [
 		self::NAMA_RUANGAN => 'required|string',
 		self::TIPE         => 'required|nullable|string',
 		self::DESKRIPSI    => 'required|nullable|string',
 		self::KAPASITAS    => 'required|integer',
 		self::GAMBAR       => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+	];
+
+	public static $rules_update = [
+		self::NAMA_RUANGAN => 'required|string',
+		self::TIPE         => 'required|nullable|string',
+		self::DESKRIPSI    => 'required|nullable|string',
+		self::KAPASITAS    => 'required|integer',
+		self::GAMBAR       => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048',
 	];
 
 	protected $table    = self::TABLE_NAME;
@@ -55,7 +62,7 @@ class Gallery extends Model
 		self::DELETED_AT => 'datetime:Y-m-d H:i:s',
 	];
 
-	protected static $logName = 'product';
+	protected static $logName = 'gallery';
 	protected static $logFillable = true;
 
 	protected function runSoftDelete()
