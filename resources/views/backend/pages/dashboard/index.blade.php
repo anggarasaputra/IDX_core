@@ -97,12 +97,17 @@
                         <div class="seo-fact sbg4">
                             <div class="p-4 d-flex justify-content-between align-items-center">
                                 <div class="seofct-icon"><i class="fa fa-list-alt"></i> Kode Ruang</div>
-                            <h2>{{ $qrcode_url['kode_ruang'] }}</h2>
+                                <h2>{{ $qrcode_url['kode_ruang'] }}</h2>
                             </div>
                         </div>
-                        <a href="https://chart.googleapis.com/chart?chs=450x450&cht=qr&chl={{ $qrcode_url['url'] }}&chld=Q" download="qrcode-{{ $qrcode_url['kode_ruang'] }}.jpg" target="_blank">
-                        <img src="https://chart.googleapis.com/chart?chs=450x450&cht=qr&chl={{ $qrcode_url['url'] }}&chld=Q"
-                            alt="QR code">
+                        <div class="alert alert-success" role="alert">
+                            Url QR Code : <a href="{{ $qrcode_url['url'] }}" target="_blank">{{ $qrcode_url['url'] }}</a>
+                        </div>
+                        @php
+                            $google_url = 'https://chart.googleapis.com/chart?chs=450x450&cht=qr&chl=' . $qrcode_url['url'] . '&chld=Q';
+                        @endphp
+                        <a href="{{ $google_url }}" download="qrcode-{{ $qrcode_url['kode_ruang'] }}.jpg" target="_blank">
+                            <img src="{{ $google_url }}" alt="QR code">
                         </a>
                     </div>
                 </div>
