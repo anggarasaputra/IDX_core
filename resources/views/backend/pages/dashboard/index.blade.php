@@ -106,9 +106,12 @@
                         @php
                             $google_url = 'https://chart.googleapis.com/chart?chs=450x450&cht=qr&chl=' . $qrcode_url['url'] . '&chld=Q';
                         @endphp
-                        <a href="{{ $google_url }}" download="qrcode-{{ $qrcode_url['kode_ruang'] }}.jpg" target="_blank">
-                            <img src="{{ $google_url }}" alt="QR code">
-                        </a>
+                        <center>
+                            <a href="{{ $google_url }}" download="qrcode-{{ $qrcode_url['kode_ruang'] }}.jpg"
+                                target="_blank">
+                                <img src="{{ $google_url }}" alt="QR code">
+                            </a>
+                        </center>
                     </div>
                 </div>
             </div>
