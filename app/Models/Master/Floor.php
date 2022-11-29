@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Lantai extends Model
+class Floor extends Model
 {
     use LogsActivity;
     use SoftDeletes;

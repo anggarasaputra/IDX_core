@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\Master\Lantai;
+use App\Models\Master\Floor;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class MasterLantaiSeeder extends Seeder
+class MasterFloorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,13 +13,13 @@ class MasterLantaiSeeder extends Seeder
      */
     public function run()
     {
-        if (!(Schema::hasTable(Lantai::TABLE_NAME))) {
+        if (!(Schema::hasTable(Floor::TABLE_NAME))) {
             return;
         }
 
-        for ($i = 1; $i <= Lantai::MAX_FLOOR; $i++) {
+        for ($i = 1; $i <= Floor::MAX_FLOOR; $i++) {
             try {
-                Lantai::updateOrCreate(
+                Floor::updateOrCreate(
                     ['id' => $i],
                     ['name' => "Lantai {$i}"]
                 );
