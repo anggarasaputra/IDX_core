@@ -50,7 +50,7 @@ Permission Page - Admin Panel
                                 <tr>
                                     <th width="5%">Id</th>
                                     <th width="10%">Log Name</th>
-                                    <th width="60%">Causer</th>
+                                    <th width="60%">Deskripsi</th>
                                     <th width="15%">Created At</th>
                                 </tr>
                             </thead>
@@ -60,7 +60,6 @@ Permission Page - Admin Panel
                                     <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $activity->log_name }}</td>
                                     <td>{{ $activity->description }}</td>
-                                    <td>{{ $activity->causer->name ?? '' }}</td>
                                     <td>{{ $activity->created_at->diffForHumans() }}</td>
                                 </tr>
                                @endforeach

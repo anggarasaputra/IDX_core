@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Gallery extends Model
 {
+	use LogsActivity;
 	use SoftDeletes;
 
 	const TABLE_NAME   = 'gallery';
@@ -52,6 +54,9 @@ class Gallery extends Model
 		self::UPDATED_AT => 'datetime:Y-m-d H:i:s',
 		self::DELETED_AT => 'datetime:Y-m-d H:i:s',
 	];
+
+	protected static $logName = 'product';
+	protected static $logFillable = true;
 
 	protected function runSoftDelete()
 	{

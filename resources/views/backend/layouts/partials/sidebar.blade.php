@@ -93,6 +93,19 @@
                     </li>
                     @endif
 
+                    @if ($usr->can('activitylog.view') ||  $usr->can('activitylog.edit') ||  $usr->can('activitylog.delete'))
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-tasks"></i><span>
+                            Activity Log
+                        </span></a>
+                        <ul class="collapse {{ Route::is('admin.activitys.create') || Route::is('admin.activitys.index') || Route::is('admin.activitys.edit') || Route::is('admin.activitys.show') ? 'in' : '' }}">
+                            @if ($usr->can('activitylog.view'))
+                                <li class="{{ Route::is('admin.activitys.index')  || Route::is('admin.activitys.edit') ? 'active' : '' }}"><a href="{{ route('admin.activitys.index') }}">All activity</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    @endif
+
                 </ul>
             </nav>
         </div>

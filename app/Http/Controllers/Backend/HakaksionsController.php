@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class HakaksionsController extends Controller
 {
-    use LogsActivity;
     /**
      * Display a listing of the resource.
      *
