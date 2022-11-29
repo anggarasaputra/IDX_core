@@ -40,9 +40,9 @@ class DashboardController extends Controller
     {
         if (isset($request->url)) {
             parse_str(parse_url($request->url, PHP_URL_QUERY), $query);
-            $id = $query['token'];
-            $decrypted = base64_decode(urldecode($id));
-            session()->flash('success', 'QR Code: ' . $request->url . ' Kode Ruang: ' . $decrypted);
+            $id = $query['token'] ?? null;
+            $kode_ruang = $id ? base64_decode(urldecode($id)) : '-';
+            session()->flash('success', 'QR Code: ' . $request->url . ' | Kode Ruang: ' . $kode_ruang);
             return redirect()->back();
         }
     }
