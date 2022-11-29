@@ -44,6 +44,10 @@ class Floor extends Model
      * @var array
      */
     public static $rules = [
+        /**
+         * Alias for id is number in form input
+         */
+        'number'    => 'nullable|integer',
         self::ID    => 'nullable|integer',
         self::NAME  => 'required|string'
     ];
@@ -61,6 +65,19 @@ class Floor extends Model
         self::DELETED_BY,
         self::IS_DELETED,
     ];
+
+    /**
+     * Permission group name floor (lantai)
+     */
+    public const PERMISSION_GROUP_NAME = 'floor';
+
+    /**
+     * List permission floor (lantai)
+     */
+    public const PERMISSION_CREATE = 'create';
+    public const PERMISSION_VIEW = 'view';
+    public const PERMISSION_EDIT = 'edit';
+    public const PERMISSION_DELETE = 'delete';
 
     /**
      * Model log name
