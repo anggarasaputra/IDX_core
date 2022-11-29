@@ -18,8 +18,8 @@ class CheckedController extends Controller
 
     public function index(Request $request)
     {
-        $token = $request->input('token') ?? '';
-        $kode_ruang = base64_decode(urldecode($token));
+        $token = $request->input('token') ?? null;
+        $kode_ruang = $token ? base64_decode(urldecode($token)) : '-';
 
         return view('cheked', compact('kode_ruang'));
     }
