@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('gallery', 'Backend\GalleryController', ['names' => 'admin.gallery']);
     Route::resource('activitylog', 'Backend\ActivitylogController', ['names' => 'admin.activitys']);
     //Route::get('/activitylog', [App\Http\Controllers\Backend\SettingController::class, 'index']);
+
+    /**
+     * Routes Floor (lantai)
+     */
+    Route::resource('floor', 'Backend\FloorController', ['names' => 'admin.floor']);
 
     // Login Routes
     Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('admin.login');

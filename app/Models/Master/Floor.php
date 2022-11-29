@@ -4,6 +4,7 @@ namespace App\Models\Master;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Floor extends Model
@@ -63,6 +64,7 @@ class Floor extends Model
         self::CREATED_BY,
         self::UPDATED_BY,
         self::DELETED_BY,
+        self::DELETED_AT,
         self::IS_DELETED,
     ];
 
@@ -102,5 +104,21 @@ class Floor extends Model
     public function getDescriptionForEvent(string $eventName): string
     {
         return "This model has been {$eventName}";
+    }
+
+    /**
+     * Soft Delete method
+     *
+     * @return void
+     */
+    protected function runSoftDelete()
+    {
+        $query = $this->newQuery()->where($this->getKeyName(), $this->getKey());
+        $time  = $this->freshTimestamp();
+        $query->update([
+            self::DELETED_BY => Auth::guard('admin')->user()->id,
+            self::DELETED_AT => $this->fromDateTime($time),
+            self::IS_DELETED => 1,
+        ]);
     }
 }
