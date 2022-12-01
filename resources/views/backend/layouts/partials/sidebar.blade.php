@@ -144,6 +144,29 @@
                      @endif
                      {{-- End Floor Section --}}
 
+                     {{-- Rooms Section --}}
+                     @if ($usr->can('rooms.create') || $usr->can('rooms.view') || $usr->can('rooms.edit') || $usr->can('rooms.delete'))
+                         <li>
+                             <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-sign-in"></i><span>
+                                     Rooms
+                                 </span></a>
+                             <ul
+                                 class="collapse {{ Route::is('admin.rooms.create') || Route::is('admin.rooms.index') || Route::is('admin.rooms.edit') || Route::is('admin.rooms.show') ? 'in' : '' }}">
+                                 @if ($usr->can('rooms.view'))
+                                     <li
+                                         class="{{ Route::is('admin.rooms.index') || Route::is('admin.rooms.edit') ? 'active' : '' }}">
+                                         <a href="{{ route('admin.rooms.index') }}">Rooms List</a>
+                                     </li>
+                                 @endif
+                                 @if ($usr->can('rooms.create'))
+                                     <li class="{{ Route::is('admin.rooms.create') ? 'active' : '' }}"><a
+                                             href="{{ route('admin.rooms.create') }}">Create Rooms</a></li>
+                                 @endif
+                             </ul>
+                         </li>
+                     @endif
+                     {{-- End Rooms Section --}}
+
                      @if ($usr->can('activitylog.view') || $usr->can('activitylog.edit') || $usr->can('activitylog.delete'))
                          <li>
                              <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-tasks"></i><span>

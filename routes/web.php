@@ -46,6 +46,11 @@ Route::group(['prefix' => 'admin'], function () {
      */
     Route::resource('floor', 'Backend\FloorController', ['names' => 'admin.floor']);
 
+    /**
+     * Routes Rooms (ruangan)
+     */
+    Route::resource('rooms', 'Backend\RoomsController', ['names' => 'admin.rooms']);
+
     // Login Routes
     Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login/submit', 'Backend\Auth\LoginController@login')->name('admin.login.submit');
