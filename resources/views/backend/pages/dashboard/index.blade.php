@@ -94,9 +94,15 @@
                         <h3>Download QR Code Ruang Meeting</h3>
                     </div>
                     <div class="card-body">
+                        <div class="seo-fact sbg1">
+                            <div class="p-4 d-flex justify-content-between align-items-center">
+                                <div class="seofct-icon"><i class="fa fa-key"></i> Random Kode Booking</div>
+                                <h2>{{ $rand_booking }}</h2>
+                            </div>
+                        </div><br>
                         <div class="seo-fact sbg4">
                             <div class="p-4 d-flex justify-content-between align-items-center">
-                                <div class="seofct-icon"><i class="fa fa-list-alt"></i> Kode Ruang</div>
+                                <div class="seofct-icon"><i class="fa fa-list-alt"></i> Random Kode Ruang</div>
                                 <h2>{{ $qrcode_url['kode_ruang'] }}</h2>
                             </div>
                         </div>
