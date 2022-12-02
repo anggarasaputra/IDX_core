@@ -114,7 +114,7 @@ class OrderRooms extends Model
     /**
      * Permission group name Meeting Room
      */
-    public const PERMISSION_GROUP_NAME = 'order_rooms';
+    public const PERMISSION_GROUP_NAME = 'order rooms';
 
     /**
      * List permission Meeting Room

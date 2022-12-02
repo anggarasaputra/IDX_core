@@ -41,7 +41,6 @@ class RolePermissionSeeder extends Seeder
                 'group_name' => 'dashboard',
                 'permissions' => [
                     'dashboard.view',
-                    'dashboard.edit',
                 ]
             ],
             [
@@ -82,24 +81,6 @@ class RolePermissionSeeder extends Seeder
                     'gallery.view',
                     'gallery.edit',
                     'gallery.delete',
-                ]
-            ],
-            [
-                'group_name' => 'dashboard user',
-                'permissions' => [
-                    'dashboard_user.view',
-                ]
-            ],
-            [
-                'group_name' => 'user room',
-                'permissions' => [
-                    'user_room.view',
-                ]
-            ],
-            [
-                'group_name' => 'user gallery',
-                'permissions' => [
-                    'user_gallery.view',
                 ]
             ],
         ];
