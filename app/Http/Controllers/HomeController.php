@@ -16,6 +16,9 @@ class HomeController extends Controller
     {
         $this->middleware(function ($request, $next) {
             $this->user = Auth::guard('admin')->user();
+            if (!$this->user){
+                return redirect('auth/login');
+            }
             return $next($request);
         });
     }
