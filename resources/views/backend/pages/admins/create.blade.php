@@ -2,7 +2,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Admin Create - Admin Panel
+User Create - Admin Panel
 @endsection
 
 @section('styles')
@@ -44,49 +44,85 @@ Admin Create - Admin Panel
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Create New Role</h4>
-                    @include('backend.layouts.partials.messages')
+                    <h4 class="header-title">Create New User</h4>
+                    {{-- @include('backend.layouts.partials.messages') --}}
                     
                     <form action="{{ route('admin.admins.store') }}" method="POST">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="name">Admin Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                                <label for="name">User Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter Name" value="{{ old('name') }}">
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="email">Admin Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email">
+                                <label for="email">User Email</label>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter Email" value="{{ old('email') }}">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter Password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Password">
+                                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" placeholder="Enter Password">
+
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-6">
                                 <label for="password">Assign Roles</label>
-                                <select name="roles[]" id="roles" class="form-control select2" multiple>
+                                <select name="roles[]" id="roles" class="form-control @error('roles') is-invalid @enderror select2" multiple>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                        <option value="{{ $role->name }}" {{ in_array($role->name, old('roles', [])) ? 'selected' : '' }}>{{ $role->name }}</option>
                                     @endforeach
                                 </select>
+
+                                @error('roles')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group col-md-6 col-sm-6">
-                                <label for="username">Admin Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
+                                <label for="username">User Username</label>
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Enter Username" value="{{ old('username') }}">
+
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save Admin</button>
+                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save User</button>
                     </form>
                 </div>
             </div>

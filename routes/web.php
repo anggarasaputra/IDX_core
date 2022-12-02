@@ -27,6 +27,22 @@ Route::post('/cheked/validate', 'CheckedController@validateBooking')->name('chek
 Route::get('/cheked/success/{kode_booking}', 'CheckedController@successValidate')->name('cheked.success');
 
 /**
+ * Auth routes
+ */
+Route::group(['prefix' => 'auth'], function () {
+    // Login Routes
+    Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('auth.login');
+    Route::post('/login/submit', 'Backend\Auth\LoginController@login')->name('auth.login.submit');
+
+    // Logout Routes
+    Route::post('/logout/submit', 'Backend\Auth\LoginController@logout')->name('auth.logout.submit');
+
+    // Forget Password Routes
+    Route::get('/password/reset', 'Backend\Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password.request');
+    Route::post('/password/reset/submit', 'Backend\Auth\ForgotPasswordController@reset')->name('auth.password.update');
+});
+
+/**
  * Admin routes
  */
 Route::group(['prefix' => 'admin'], function () {
@@ -50,15 +66,4 @@ Route::group(['prefix' => 'admin'], function () {
      * Routes Rooms (ruangan)
      */
     Route::resource('rooms', 'Backend\RoomsController', ['names' => 'admin.rooms']);
-
-    // Login Routes
-    Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('admin.login');
-    Route::post('/login/submit', 'Backend\Auth\LoginController@login')->name('admin.login.submit');
-
-    // Logout Routes
-    Route::post('/logout/submit', 'Backend\Auth\LoginController@logout')->name('admin.logout.submit');
-
-    // Forget Password Routes
-    Route::get('/password/reset', 'Backend\Auth\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-    Route::post('/password/reset/submit', 'Backend\Auth\ForgotPasswordController@reset')->name('admin.password.update');
 });

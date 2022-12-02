@@ -9,7 +9,7 @@
     <div class="login-area">
         <div class="container">
             <div class="login-box ptb--100">
-                <form method="POST" action="{{ route('admin.login.submit') }}">
+                <form method="POST" action="{{ route('auth.login.submit') }}">
                     @csrf
                     <div class="login-form-head">
                         <h4>Sign In</h4>

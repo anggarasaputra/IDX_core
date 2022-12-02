@@ -11,6 +11,5 @@
     <p class="mt-2">
         {{ $exception->getMessage() }}
     </p>
-    <a href="{{ route('admin.dashboard') }}">Back to Dashboard</a>
-    <a href="{{ route('admin.login') }}">Login Again !</a>
+    <a href="{{ route('auth.login') }}">Back !</a>
 @endsection

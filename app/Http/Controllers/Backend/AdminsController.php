@@ -31,7 +31,7 @@ class AdminsController extends Controller
     public function index()
     {
         if (is_null($this->user) || !$this->user->can('admin.view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view any admin !');
+            abort(403, 'Sorry !! You are Unauthorized to view any user !');
         }
 
         $admins = Admin::all();
@@ -46,7 +46,7 @@ class AdminsController extends Controller
     public function create()
     {
         if (is_null($this->user) || !$this->user->can('admin.create')) {
-            abort(403, 'Sorry !! You are Unauthorized to create any admin !');
+            abort(403, 'Sorry !! You are Unauthorized to create any user !');
         }
 
         $roles  = Role::all();
@@ -62,7 +62,7 @@ class AdminsController extends Controller
     public function store(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('admin.create')) {
-            abort(403, 'Sorry !! You are Unauthorized to create any admin !');
+            abort(403, 'Sorry !! You are Unauthorized to create any user !');
         }
 
         // Validation Data
@@ -71,6 +71,7 @@ class AdminsController extends Controller
             'email' => 'required|max:100|email|unique:admins',
             'username' => 'required|max:100|unique:admins',
             'password' => 'required|min:6|confirmed',
+            'roles' => 'required|min:1',
         ]);
 
         // Create New Admin
@@ -85,7 +86,7 @@ class AdminsController extends Controller
             $admin->assignRole($request->roles);
         }
 
-        session()->flash('success', 'Admin has been created !!');
+        session()->flash('success', 'User has been created !!');
         return redirect()->route('admin.admins.index');
     }
 
@@ -109,7 +110,7 @@ class AdminsController extends Controller
     public function edit($id)
     {
         if (is_null($this->user) || !$this->user->can('admin.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to edit any admin !');
+            abort(403, 'Sorry !! You are Unauthorized to edit any user !');
         }
 
         $admin = Admin::find($id);
@@ -127,7 +128,7 @@ class AdminsController extends Controller
     public function update(Request $request, $id)
     {
         if (is_null($this->user) || !$this->user->can('admin.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to edit any admin !');
+            abort(403, 'Sorry !! You are Unauthorized to edit any user !');
         }
 
         // Create New Admin
@@ -138,6 +139,7 @@ class AdminsController extends Controller
             'name' => 'required|max:50',
             'email' => 'required|max:100|email|unique:admins,email,' . $id,
             'password' => 'nullable|min:6|confirmed',
+            'roles' => 'required|min:1',
         ]);
 
 
@@ -154,7 +156,7 @@ class AdminsController extends Controller
             $admin->assignRole($request->roles);
         }
 
-        session()->flash('success', 'Admin has been updated !!');
+        session()->flash('success', 'User has been updated !!');
         return redirect()->route('admin.admins.index');
     }
 
@@ -167,7 +169,7 @@ class AdminsController extends Controller
     public function destroy($id)
     {
         if (is_null($this->user) || !$this->user->can('admin.delete')) {
-            abort(403, 'Sorry !! You are Unauthorized to delete any admin !');
+            abort(403, 'Sorry !! You are Unauthorized to delete any user !');
         }
 
         $admin = Admin::find($id);
@@ -175,7 +177,7 @@ class AdminsController extends Controller
             $admin->delete();
         }
 
-        session()->flash('success', 'Admin has been deleted !!');
+        session()->flash('success', 'User has been deleted !!');
         return back();
     }
 }

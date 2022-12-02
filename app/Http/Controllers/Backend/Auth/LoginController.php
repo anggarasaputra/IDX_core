@@ -28,7 +28,15 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::ADMIN_DASHBOARD;
+    public function redirectTo()
+    {
+        $roleAdmin = Auth::guard('admin')->user()->hasRole(['superadmin']);
+        if ($roleAdmin) {
+            return '/admin';
+        } else {
+            return '/user';
+        }
+    }
 
     /**
      * show login form for admin guard
@@ -37,6 +45,9 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        if (Auth::guard('admin')->check()) {
+            return redirect()->intended($this->redirectPath());
+        }
         return view('backend.auth.login');
     }
 
@@ -59,12 +70,12 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // Redirect to dashboard
             session()->flash('success', 'Successully Logged in !');
-            return redirect()->route('admin.dashboard');
+            return redirect()->intended($this->redirectPath());
         } else {
             // Search using username
             if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
                 session()->flash('success', 'Successully Logged in !');
-                return redirect()->route('admin.dashboard');
+                return redirect()->intended($this->redirectPath());
             }
             // error
             session()->flash('error', 'Invalid email and password');
@@ -80,6 +91,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect()->route('admin.login');
+        return redirect()->route('auth.login');
     }
 }
