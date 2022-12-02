@@ -140,7 +140,7 @@ class OrderGallery extends Model
      *
      * @var string
      */
-    protected static $logName = 'product';
+    protected static $logName = 'order_gallery';
 
     /**
      * Model log fillable condition

@@ -86,7 +86,7 @@ class Floor extends Model
      *
      * @var string
      */
-    protected static $logName = 'product';
+    protected static $logName = 'floor';
 
     /**
      * Model log fillable condition

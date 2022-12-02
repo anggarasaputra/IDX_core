@@ -122,7 +122,7 @@ class Rooms extends Model
      *
      * @var string
      */
-    protected static $logName = 'product';
+    protected static $logName = 'rooms';
 
     /**
      * Model log fillable condition

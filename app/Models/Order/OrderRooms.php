@@ -140,7 +140,7 @@ class OrderRooms extends Model
      *
      * @var string
      */
-    protected static $logName = 'product';
+    protected static $logName = 'order_rooms';
 
     /**
      * Model log fillable condition
