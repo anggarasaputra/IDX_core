@@ -24,7 +24,7 @@ Route::get('/', 'HomeController@redirectAdmin')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/cheked/qrcode', 'CheckedController@index')->name('cheked.qrcode');
 Route::post('/cheked/validate', 'CheckedController@validateBooking')->name('cheked.validate');
-Route::get('/cheked/success', 'CheckedController@successValidate')->name('cheked.success');
+Route::get('/cheked/success/{kode_booking}', 'CheckedController@successValidate')->name('cheked.success');
 
 /**
  * Admin routes

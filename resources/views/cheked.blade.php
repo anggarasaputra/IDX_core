@@ -39,8 +39,7 @@
                             @if ($data['ruangan'])
                                 <div class="card card-bordered">
                                     <img class="card-img-top img-fluid"
-                                        src="{{ url('/storage/gambar/digital-talent-expanding-gap_1669626945.jpg') }}"
-                                        alt="gambar ruangan">
+                                        src="{{ url('/storage/' . $data['ruangan']->gambar) }}" alt="gambar ruangan">
                                     <div class="card-body">
                                         <h5 class="title">{{ $data['ruangan']->nama_ruangan }}</h5>
                                         <span>

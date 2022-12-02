@@ -88,7 +88,7 @@ class GalleryController extends Controller
         ]);
 
         session()->flash('success', 'Gallery has been created !!');
-        return back();
+        return redirect()->route('admin.gallery.index');
     }
 
     /**
@@ -159,7 +159,7 @@ class GalleryController extends Controller
         if (isset($gambar_delete) && File::exists($gambar_delete)) File::delete($gambar_delete);
 
         session()->flash('success', 'Gallery has been updated !!');
-        return back();
+        return redirect()->route('admin.gallery.index');
     }
 
     /**

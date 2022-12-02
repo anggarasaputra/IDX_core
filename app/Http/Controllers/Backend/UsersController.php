@@ -121,7 +121,7 @@ class UsersController extends Controller
         }
 
         session()->flash('success', 'User has been updated !!');
-        return back();
+        return redirect()->route('admin.users.index');
     }
 
     /**

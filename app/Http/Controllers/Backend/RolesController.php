@@ -82,7 +82,7 @@ class RolesController extends Controller
         }
 
         session()->flash('success', 'Role has been created !!');
-        return back();
+        return redirect()->route('admin.admins.index');
     }
 
     /**
@@ -144,7 +144,7 @@ class RolesController extends Controller
         }
 
         session()->flash('success', 'Role has been updated !!');
-        return back();
+        return redirect()->route('admin.roles.index');
     }
 
     /**

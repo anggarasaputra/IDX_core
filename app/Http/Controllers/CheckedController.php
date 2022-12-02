@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use App\Models\Rooms;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -34,7 +35,7 @@ class CheckedController extends Controller
                 $data['tipe']     = $kode[0];
                 $data['room_id']  = $kode[1];
                 if ($kode[0] == 'M') {
-                    $data['ruangan'] = Gallery::first();
+                    $data['ruangan'] = Rooms::first();
                 } else if ($kode[0] == 'G') {
                     $data['ruangan'] = Gallery::first();
                 }
@@ -66,11 +67,13 @@ class CheckedController extends Controller
         // throw ValidationException::withMessages(['room_id' => 'Ruangan / Tipe Tidak ditemukan !!']);
 
         session()->flash('success', 'Kode Booking has been validated !!');
-        return redirect()->route('cheked.success');;
+        return redirect()->route('cheked.success', $kode_booking);
     }
 
-    public function successValidate(Request $request)
+    public function successValidate(Request $request, $kode_booking)
     {
+        // Nantinya bawa kode booking.
+        // Untuk bisa menampilkan pesanan siapa, jam berapa dan ruang yang dipesan
         return view('success');
     }
 }
