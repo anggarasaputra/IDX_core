@@ -45,17 +45,6 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
-                'group_name' => 'blog',
-                'permissions' => [
-                    // Blog Permissions
-                    'blog.create',
-                    'blog.view',
-                    'blog.edit',
-                    'blog.delete',
-                    'blog.approve',
-                ]
-            ],
-            [
                 'group_name' => 'admin',
                 'permissions' => [
                     // admin Permissions
@@ -93,6 +82,24 @@ class RolePermissionSeeder extends Seeder
                     'gallery.view',
                     'gallery.edit',
                     'gallery.delete',
+                ]
+            ],
+            [
+                'group_name' => 'dashboard user',
+                'permissions' => [
+                    'dashboard_user.view',
+                ]
+            ],
+            [
+                'group_name' => 'user room',
+                'permissions' => [
+                    'user_room.view',
+                ]
+            ],
+            [
+                'group_name' => 'user gallery',
+                'permissions' => [
+                    'user_gallery.view',
                 ]
             ],
         ];

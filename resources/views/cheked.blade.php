@@ -33,9 +33,6 @@
                             <p>Masukan Kode Booking Ruang Yang Anda Pesan!</p>
                         </div>
                         <div class="login-form-body">
-                            <div class="alert alert-success" role="alert">
-                                Kode Ruang : {{ $kode_ruang ?? '-' }}
-                            </div>
                             @if ($data['ruangan'])
                                 <div class="card card-bordered">
                                     <img class="card-img-top img-fluid"
@@ -44,7 +41,7 @@
                                         <h5 class="title">{{ $data['ruangan']->nama_ruangan }}</h5>
                                         <span>
                                             <span class="badge badge-success">
-                                                {{ $data['tipe'] == 'M' ? $data['ruangan']->lantai : $data['ruangan']->tipe }}
+                                                {{ $data['tipe'] == 'M' ? 'Lantai: ' . $data['ruangan']->lantai->name : $data['ruangan']->tipe }}
                                             </span>
                                             <span class="badge badge-info">
                                                 <i class="fa fa-user"></i> {{ $data['ruangan']->kapasitas }}
@@ -64,14 +61,8 @@
                                 <input type="hidden" id="room_id" name="room_id" value="{{ $data['room_id'] }}">
                                 <input type="hidden" id="tipe" name="tipe" value="{{ $data['tipe'] }}">
                                 <input type="text" id="kode_booking" name="kode_booking" maxlength="6"
-                                    value="{{ old('kode_booking') }}" class="@error('kode_booking') is-invalid @enderror">
+                                    value="{{ old('kode_booking') }}">
                                 <i class="ti-key"></i>
-                                <div class="text-danger">
-                                    @error('kode_booking')
-                                        {{ $message }}
-                                    @enderror
-                                </div>
-
                             </div>
                             <div class="submit-btn-area">
                                 <button id="form_submit" type="submit">Validasi <i class="ti-arrow-right"></i></button>

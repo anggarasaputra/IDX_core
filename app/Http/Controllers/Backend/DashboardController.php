@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\Gallery;
+use App\Models\Order\OrderGallery;
+use App\Models\Order\OrderRooms;
+use App\Models\Rooms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class DashboardController extends Controller
 {
@@ -26,15 +27,64 @@ class DashboardController extends Controller
     {
         if (is_null($this->user) || !$this->user->can('dashboard.view')) {
             abort(403, 'Sorry !! You are Unauthorized to view dashboard !');
+        } else if (!$this->user->hasRole(['superadmin'])) {
+            return redirect()->route('user.dashboard');
         }
 
-        $total_roles = count(Role::select('id')->get());
-        $total_admins = count(Admin::select('id')->get());
-        $total_permissions = count(Permission::select('id')->get());
+        $total_room_book = OrderRooms::count();
+        $total_room_done = OrderRooms::whereIn(OrderRooms::STATUS, [OrderRooms::STATUS_APPROVE, OrderRooms::STATUS_DONE])->count();
+        $total_room_reject = OrderRooms::whereIn(OrderRooms::STATUS, [OrderRooms::STATUS_REJECT])->count();
+        $total_gallery_book = OrderGallery::count();
+        $total_gallery_done = OrderGallery::whereIn(OrderGallery::STATUS, [OrderGallery::STATUS_APPROVE, OrderGallery::STATUS_DONE])->count();
+        $total_gallery_reject = OrderGallery::whereIn(OrderGallery::STATUS, [OrderGallery::STATUS_REJECT])->count();
+
+        $last_order_rooms = OrderRooms::with('room')
+            ->orderBy(OrderRooms::CREATED_AT, 'DESC')
+            ->limit(5)
+            ->get();
+        $last_order_gallery = OrderGallery::with('gallery')
+            ->orderBy(OrderGallery::CREATED_AT, 'DESC')
+            ->limit(5)
+            ->get();
 
         $qrcode_url = $this->createUrl();
         $rand_booking = $this->kodeBooking();
-        return view('backend.pages.dashboard.index', compact('total_admins', 'total_roles', 'total_permissions', 'qrcode_url', 'rand_booking'));
+        return view('backend.pages.dashboard.index', compact('total_room_book', 'total_room_done', 'total_room_reject', 'total_gallery_book', 'total_gallery_done', 'total_gallery_reject', 'last_order_rooms', 'last_order_gallery', 'qrcode_url', 'rand_booking'));
+    }
+
+    public function indexUser()
+    {
+        if (is_null($this->user) || !$this->user->can('dashboard_user.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view dashboard !');
+        } else if (!$this->user->hasRole('user')) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        $total_room_book = OrderRooms::where(OrderRooms::STATUS, OrderRooms::STATUS_APPROVE)
+            ->where(OrderRooms::ID_USER, $this->user->id)
+            ->count();
+        $total_room_done = OrderRooms::where(OrderRooms::STATUS, OrderRooms::STATUS_DONE)
+            ->where(OrderRooms::ID_USER, $this->user->id)
+            ->count();
+        $total_gallery_book = OrderGallery::where(OrderGallery::STATUS, OrderGallery::STATUS_APPROVE)
+            ->where(OrderGallery::ID_USER, $this->user->id)
+            ->count();
+        $total_gallery_done = OrderGallery::where(OrderGallery::STATUS, OrderGallery::STATUS_DONE)
+            ->where(OrderGallery::ID_USER, $this->user->id)
+            ->count();
+
+        $last_order_rooms = OrderRooms::with('room')
+            ->where(OrderRooms::ID_USER, $this->user->id)
+            ->orderBy(OrderRooms::CREATED_AT, 'DESC')
+            ->limit(5)
+            ->get();
+        $last_order_gallery = OrderGallery::with('gallery')
+            ->where(OrderGallery::ID_USER, $this->user->id)
+            ->orderBy(OrderGallery::CREATED_AT, 'DESC')
+            ->limit(5)
+            ->get();
+
+        return view('backend.pages.dashboard-user.index', compact('total_room_book', 'total_room_done', 'total_gallery_book', 'total_gallery_done', 'last_order_rooms', 'last_order_gallery'));
     }
 
     public function qrcode(Request $request)
@@ -50,8 +100,13 @@ class DashboardController extends Controller
 
     public function createUrl()
     {
-        $id = rand(1, 100);
         $type = (['G', 'M'])[rand(0, 1)];
+        if ($type == 'M') {
+            $randRooms = Rooms::inRandomOrder()->first();
+        } else {
+            $randRooms = Gallery::inRandomOrder()->first();
+        }
+        $id = $randRooms ? $randRooms->id : rand(0, 100);
         $kode_ruang = $type . '|' . $id;
         $encryptId = urlencode(base64_encode($kode_ruang));
         $url = route('cheked.qrcode') . '?token=' . $encryptId;
@@ -106,7 +161,7 @@ class DashboardController extends Controller
         $i = 1;
         $txt_abjad = "";
         while ($i <= $length_abjad) {
-            $txt_abjad .= $huruf[mt_rand(0, strlen($huruf))];
+            $txt_abjad .= $huruf[mt_rand(0, strlen($huruf) - 1)];
             $i++;
         }
 

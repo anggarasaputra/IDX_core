@@ -3,14 +3,14 @@
 namespace App\Models\Order;
 
 use App\Models\Admin;
-use App\Models\Rooms;
+use App\Models\Gallery;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class OrderRooms extends Model
+class OrderGallery extends Model
 {
     use LogsActivity;
     use SoftDeletes;
@@ -18,7 +18,7 @@ class OrderRooms extends Model
     /**
      * Defining table and the columns
      */
-    const TABLE_NAME   = 'order_rooms';
+    const TABLE_NAME   = 'order_gallery';
     const ID           = 'id';
     const ID_USER      = 'id_user';
     const ID_ROOM      = 'id_room';
@@ -56,7 +56,7 @@ class OrderRooms extends Model
     protected $table = self::TABLE_NAME;
 
     /**
-     * Rules validation for Meeting Room
+     * Rules validation for Gallery
      *
      * @var array
      */
@@ -76,7 +76,7 @@ class OrderRooms extends Model
     ];
 
     /**
-     * All statuses for Order Rooms
+     * All statuses for Order Gallery
      */
     const STATUS_DRAFT = 1;
     const STATUS_APPROVE = 2;
@@ -84,7 +84,7 @@ class OrderRooms extends Model
     const STATUS_DONE = 4;
 
     /**
-     * List Orders for Room
+     * List Orders for Gallery
      */
     public const STATUS_ORDER = [
         self::STATUS_DRAFT,
@@ -112,27 +112,27 @@ class OrderRooms extends Model
     }
 
     /**
-     * Permission group name Meeting Room
+     * Permission group name Gallery
      */
-    public const PERMISSION_GROUP_NAME = 'order_rooms';
+    public const PERMISSION_GROUP_NAME = 'order_gallery';
 
     /**
-     * List permission Meeting Room
+     * List permission Gallery
      */
     public const PERMISSION_APPROVE = 'approve';
     public const PERMISSION_REJECT = 'reject';
 
     /**
-     * Relation Order Meeting Room
+     * Relation Order Gallery
      */
     public function user()
     {
         return $this->hasOne(Admin::class, 'id', self::ID_USER);
     }
 
-    public function room()
+    public function gallery()
     {
-        return $this->hasOne(Rooms::class, 'id', self::ID_ROOM)->with('lantai');
+        return $this->hasOne(Gallery::class, 'id', self::ID_ROOM);
     }
 
     /**

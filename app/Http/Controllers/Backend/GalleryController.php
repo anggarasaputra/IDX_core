@@ -38,6 +38,21 @@ class GalleryController extends Controller
     }
 
     /**
+     * Display a listing User of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexUser()
+    {
+        if (is_null($this->user) || !$this->user->can('user_gallery.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view list gallery !');
+        }
+
+        $galleries = Gallery::orderBy('id', 'asc')->get();
+        return view('backend.pages.gallery.indexUser', compact('galleries'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Master\Floor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -107,6 +108,14 @@ class Rooms extends Model
     public const PERMISSION_VIEW = 'view';
     public const PERMISSION_EDIT = 'edit';
     public const PERMISSION_DELETE = 'delete';
+
+    /**
+     * Relation Meeting Room
+     */
+    public function lantai()
+    {
+        return $this->hasOne(Floor::class, 'id', 'id_lantai');
+    }
 
     /**
      * Model log name

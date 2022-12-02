@@ -67,3 +67,12 @@ Route::group(['prefix' => 'admin'], function () {
      */
     Route::resource('rooms', 'Backend\RoomsController', ['names' => 'admin.rooms']);
 });
+
+/**
+ * User routes
+ */
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', 'Backend\DashboardController@indexUser')->name('user.dashboard');
+    Route::get('/rooms', 'Backend\RoomsController@indexUser')->name('user.rooms');
+    Route::get('/gallery', 'Backend\GalleryController@indexUser')->name('user.gallery');
+});

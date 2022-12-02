@@ -27,40 +27,146 @@
 
     <div class="main-content-inner">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-md-6 mt-5 mb-3">
+                    <div class="col-md-4 mt-5 mb-3">
                         <div class="card">
                             <div class="seo-fact sbg1">
                                 <a href="{{ route('admin.roles.index') }}">
                                     <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <div class="seofct-icon"><i class="fa fa-users"></i> Roles</div>
-                                        <h2>{{ $total_roles }}</h2>
+                                        <div class="seofct-icon"><i class="fa fa-users"></i> Meeting Room Book</div>
+                                        <h2>{{ $total_room_book }}</h2>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mt-md-5 mb-3">
+                    <div class="col-md-4 mt-md-5 mb-3">
                         <div class="card">
                             <div class="seo-fact sbg2">
                                 <a href="{{ route('admin.admins.index') }}">
                                     <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <div class="seofct-icon"><i class="fa fa-user"></i> Admins</div>
-                                        <h2>{{ $total_admins }}</h2>
+                                        <div class="seofct-icon"><i class="fa fa-user"></i> Meeting Room Done</div>
+                                        <h2>{{ $total_room_done }}</h2>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3 mb-lg-0">
+                    <div class="col-md-4 mt-md-5 mb-3">
+                        <div class="card">
+                            <div class="seo-fact sbg3">
+                                <a href="{{ route('admin.admins.index') }}">
+                                    <div class="p-4 d-flex justify-content-between align-items-center">
+                                        <div class="seofct-icon"><i class="fa fa-user"></i> Meeting Room Reject</div>
+                                        <h2>{{ $total_room_reject }}</h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-md-5 mb-3">
+                        <div class="card">
+                            <div class="seo-fact sbg1">
+                                <div class="p-4 d-flex justify-content-between align-items-center">
+                                    <div class="seofct-icon"><i class="fa fa-users"></i> Gallery Book</div>
+                                    <h2>{{ $total_gallery_book }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-md-5 mb-3">
+                        <div class="card">
+                            <div class="seo-fact sbg2">
+                                <div class="p-4 d-flex justify-content-between align-items-center">
+                                    <div class="seofct-icon"><i class="fa fa-user"></i> Gallery Done</div>
+                                    <h2>{{ $total_gallery_done }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-md-5 mb-3">
                         <div class="card">
                             <div class="seo-fact sbg3">
                                 <div class="p-4 d-flex justify-content-between align-items-center">
-                                    <div class="seofct-icon">Permissions</div>
-                                    <h2>{{ $total_permissions }}</h2>
+                                    <div class="seofct-icon"><i class="fa fa-user"></i> Gallery Reject</div>
+                                    <h2>{{ $total_gallery_reject }}</h2>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex justify-content-between align-items-center">
+                            <h4 class="header-title mb-0">Meeting Terakhir</h4>
+                        </div>
+                        <div class="member-box">
+                            @if (count($last_order_rooms) > 0)
+                                @foreach ($last_order_rooms as $order_room)
+                                    @php
+                                        $waktu_awal = \Carbon\Carbon::parse($order_room->awal)->translatedFormat('d F Y H:i');
+                                        $waktu_akhir = \Carbon\Carbon::parse($order_room->akhir)->translatedFormat('d F Y H:i');
+                                    @endphp
+                                    <div class="s-member">
+                                        <div class="media align-items-center">
+                                            <div class="media-body ml-5">
+                                                <p>{{ $waktu_awal . ' sampai ' . $waktu_akhir . ' Di ruang ' . $order_room->room->nama_ruangan }}
+                                                </p>
+                                            </div>
+                                            <div class="tm-social">
+                                                {{ $order_room->statusName }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="s-member">
+                                    <div class="media align-items-center">
+                                        <div class="media-body ml-5">
+                                            <span>Kosong</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex justify-content-between align-items-center">
+                            <h4 class="header-title mb-0">Gallery Terakhir</h4>
+                        </div>
+                        <div class="member-box">
+                            @if (count($last_order_gallery) > 0)
+                                @foreach ($last_order_gallery as $order_gallery)
+                                    @php
+                                        $waktu_awal = \Carbon\Carbon::parse($order_gallery->awal)->translatedFormat('d F Y H:i');
+                                        $waktu_akhir = \Carbon\Carbon::parse($order_gallery->akhir)->translatedFormat('d F Y H:i');
+                                    @endphp
+                                    <div class="s-member">
+                                        <div class="media align-items-center">
+                                            <div class="media-body ml-5">
+                                                <p>{{ $waktu_awal . ' sampai ' . $waktu_akhir . ' Di ruang ' . $order_gallery->gallery->nama_ruangan }}
+                                                </p>
+                                            </div>
+                                            <div class="tm-social">
+                                                {{ $order_gallery->statusName }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="s-member">
+                                    <div class="media align-items-center">
+                                        <div class="media-body ml-5">
+                                            <span>Kosong</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
