@@ -48,21 +48,6 @@ class RoomsController extends Controller
     }
 
     /**
-     * Display a listing User of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function indexUser()
-    {
-        if (is_null($this->user) || !$this->user->can('user_rooms.view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view list meeting room !');
-        }
-
-        $rooms = Rooms::with('lantai')->orderBy('id', 'asc')->get();
-        return view('backend.pages.rooms.indexUser', compact('rooms'));
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

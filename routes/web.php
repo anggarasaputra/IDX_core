@@ -73,6 +73,6 @@ Route::group(['prefix' => 'admin'], function () {
  */
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', 'Backend\DashboardController@indexUser')->name('user.dashboard');
-    Route::get('/rooms', 'Backend\RoomsController@indexUser')->name('user.rooms');
-    Route::get('/gallery', 'Backend\GalleryController@indexUser')->name('user.gallery');
+    Route::get('/rooms', 'Backend\OrderRoomsController@index')->name('user.rooms');
+    Route::get('/gallery', 'Backend\OrderGalleryController@index')->name('user.gallery');
 });
