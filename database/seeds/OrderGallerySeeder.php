@@ -22,6 +22,7 @@ class OrderGallerySeeder extends Seeder
             [
                 'group_name' => 'order gallery',
                 'permissions' => [
+                    'order_gallery.index',
                     'order_gallery.approve',
                     'order_gallery.reject',
                 ]

@@ -70,6 +70,9 @@ Route::group(['prefix' => 'admin'], function () {
      * Routes Gallery
      */
     Route::resource('gallery', 'Backend\GalleryController', ['names' => 'admin.gallery']);
+    Route::get('order-gallery/', 'Backend\OrderGalleryController@index')->name('admin.order-gallery.index');
+    Route::put('order-gallery/approve/{id}', 'Backend\OrderGalleryController@approve')->name('admin.order-gallery.approve');
+    Route::put('order-gallery/reject/{id}', 'Backend\OrderGalleryController@reject')->name('admin.order-gallery.reject');
 });
 
 /**
@@ -77,6 +80,22 @@ Route::group(['prefix' => 'admin'], function () {
  */
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', 'User\DashboardController@index')->name('user.dashboard');
+
+    /**
+     * Route Rooms User
+     */
     Route::get('/rooms', 'User\OrderRoomsController@index')->name('user.rooms');
+
+    /**
+     * Route Gallery User
+     */
     Route::get('/gallery', 'User\OrderGalleryController@index')->name('user.gallery');
+    Route::get('/gallery/{gallery}', 'User\OrderGalleryController@detail')->name('user.gallery.detail');
+    Route::post('/gallery', 'User\OrderGalleryController@order')->name('user.gallery.order');
+    Route::get('/gallery/order', 'User\OrderGalleryController@orderIndex')->name('user.gallery.order-index');
+    Route::get('/gallery/qr-code/{gallery}', 'User\OrderGalleryController@qrCode')->name('user.gallery.qr-code');
+    Route::post('/gallery/qr-code-ajax', 'User\OrderGalleryController@qrCodeAjax')->name('user.gallery.qr-code-ajax');
+    Route::get('/gallery/calendar/{gallery}', 'User\OrderGalleryController@calendar')->name('user.gallery.calendar');
+    Route::post('/gallery/calendar-ajax', 'User\OrderGalleryController@calendarAjax')->name('user.gallery.calendar-ajax');
+    Route::get('/gallery/order', 'User\OrderGalleryController@orderIndex')->name('user.gallery.order-index');
 });

@@ -42,10 +42,8 @@ class OrderGallery extends Model
      */
     public static $rules = [
         self::ID_ROOM      => 'required|exists:rooms,id',
-        self::AWAL         => 'nullable|datetime',
-        self::AKHIR        => 'nullable|datetime',
-        self::KODE_BOOKING => 'nullable|string',
-        self::STATUS       => 'required|in:0,1,2',
+        self::AWAL         => 'required|date_format:Y-m-d\TH:i',
+        self::AKHIR        => 'required|date_format:Y-m-d\TH:i|after:awal',
     ];
 
     /**

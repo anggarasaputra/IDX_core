@@ -16,10 +16,10 @@
                 <ul class="metismenu" id="menu">
 
                     @if ($usr->can('dashboard.view'))
-                        <li class="active">
+                        <li>
                             <a href="javascript:void(0)" aria-expanded="true"><i
-                                    class="ti-dashboard"></i><span>dashboard</span></a>
-                            <ul class="collapse">
+                                    class="fa fa-dashboard"></i><span>dashboard</span></a>
+                            <ul class="collapse {{ Route::is('admin.dashboard') ? 'in' : '' }}">
                                 <li class="{{ Route::is('admin.dashboard') ? 'active' : '' }}"><a
                                         href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             </ul>
@@ -27,10 +27,10 @@
                     @endif
 
                     @if ($usr->can('dashboard_user.view'))
-                        <li class="active">
+                        <li>
                             <a href="javascript:void(0)" aria-expanded="true"><i
-                                    class="ti-dashboard"></i><span>dashboard</span></a>
-                            <ul class="collapse">
+                                    class="fa fa-dashboard"></i><span>dashboard</span></a>
+                            <ul class="collapse {{ Route::is('user.dashboard') ? 'in' : '' }}">
                                 <li class="{{ Route::is('user.dashboard') ? 'active' : '' }}"><a
                                         href="{{ route('user.dashboard') }}">Dashboard</a></li>
                             </ul>
@@ -38,10 +38,10 @@
                     @endif
 
                     @if ($usr->can('user_rooms.view'))
-                        <li class="active">
-                            <a href="javascript:void(0)" aria-expanded="true"><i
-                                    class="ti-dashboard"></i><span>meeting rooms</span></a>
-                            <ul class="collapse">
+                        <li>
+                            <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-sign-in"></i><span>meeting
+                                    rooms</span></a>
+                            <ul class="collapse {{ Route::is('user.rooms') ? 'in' : '' }}">
                                 <li class="{{ Route::is('user.rooms') ? 'active' : '' }}"><a
                                         href="{{ route('user.rooms') }}">Meeting Rooms</a></li>
                             </ul>
@@ -49,12 +49,14 @@
                     @endif
 
                     @if ($usr->can('user_gallery.view'))
-                        <li class="active">
+                        <li>
                             <a href="javascript:void(0)" aria-expanded="true"><i
-                                    class="ti-dashboard"></i><span>gallery</span></a>
-                            <ul class="collapse">
+                                    class="fa fa-tasks"></i><span>gallery</span></a>
+                            <ul class="collapse {{ Route::is('user.gallery') || Route::is('user.gallery.order-index') ? 'in' : '' }}">
                                 <li class="{{ Route::is('user.gallery') ? 'active' : '' }}"><a
                                         href="{{ route('user.gallery') }}">Gallery</a></li>
+                                <li class="{{ Route::is('user.gallery.order-index') ? 'active' : '' }}"><a
+                                        href="{{ route('user.gallery.order-index') }}">Order Gallery</a></li>
                             </ul>
                         </li>
                     @endif
@@ -213,6 +215,17 @@
                                         <a href="{{ route('admin.activitys.index') }}">All activity</a>
                                     </li>
                                 @endif
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if ($usr->can('order_gallery.view'))
+                        <li>
+                            <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-book"></i><span>order
+                                    gallery</span></a>
+                            <ul class="collapse {{ Route::is('admin.order-gallery.index') ? 'in' : '' }}">
+                                <li class="{{ Route::is('admin.order-gallery.index') ? 'active' : '' }}"><a
+                                        href="{{ route('admin.order-gallery.index') }}">Order Gallery</a></li>
                             </ul>
                         </li>
                     @endif

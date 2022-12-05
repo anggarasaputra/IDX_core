@@ -37,6 +37,7 @@
     <div class="main-content-inner">
         <div class="row">
             <div class="col-12 mt-5">
+                @include('backend.layouts.partials.messages')
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title float-left">List Gallery</h4>
@@ -56,7 +57,7 @@
                                             </span>
                                         </span>
                                         <p class="card-text">{{ $gallery->deskripsi }}</p>
-                                        <a href="#" class="btn btn-primary">Booking</a>
+                                        <a href="{{ route('user.gallery.detail', $gallery->id) }}" class="btn btn-primary float-right">Booking</a>
                                     </div>
                                 </div>
                             </div>
