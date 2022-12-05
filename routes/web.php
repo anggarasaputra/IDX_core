@@ -90,12 +90,11 @@ Route::group(['prefix' => 'user'], function () {
      * Route Gallery User
      */
     Route::get('/gallery', 'User\OrderGalleryController@index')->name('user.gallery');
+    Route::get('/gallery/order', 'User\OrderGalleryController@orderIndex')->name('user.gallery.order-index');
     Route::get('/gallery/{gallery}', 'User\OrderGalleryController@detail')->name('user.gallery.detail');
     Route::post('/gallery', 'User\OrderGalleryController@order')->name('user.gallery.order');
-    Route::get('/gallery/order', 'User\OrderGalleryController@orderIndex')->name('user.gallery.order-index');
     Route::get('/gallery/qr-code/{gallery}', 'User\OrderGalleryController@qrCode')->name('user.gallery.qr-code');
     Route::post('/gallery/qr-code-ajax', 'User\OrderGalleryController@qrCodeAjax')->name('user.gallery.qr-code-ajax');
     Route::get('/gallery/calendar/{gallery}', 'User\OrderGalleryController@calendar')->name('user.gallery.calendar');
     Route::post('/gallery/calendar-ajax', 'User\OrderGalleryController@calendarAjax')->name('user.gallery.calendar-ajax');
-    Route::get('/gallery/order', 'User\OrderGalleryController@orderIndex')->name('user.gallery.order-index');
 });
