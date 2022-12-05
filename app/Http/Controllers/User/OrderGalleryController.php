@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order\OrderGallery;
@@ -34,6 +34,6 @@ class OrderGalleryController extends Controller
         }
 
         $galleries = Gallery::orderBy('id', 'asc')->get();
-        return view('backend.pages.order-gallery.index', compact('galleries'));
+        return view('backend.pages.order-gallery-user.index', compact('galleries'));
     }
 }

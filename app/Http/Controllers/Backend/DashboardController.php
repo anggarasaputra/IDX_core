@@ -52,41 +52,6 @@ class DashboardController extends Controller
         return view('backend.pages.dashboard.index', compact('total_room_book', 'total_room_done', 'total_room_reject', 'total_gallery_book', 'total_gallery_done', 'total_gallery_reject', 'last_order_rooms', 'last_order_gallery', 'qrcode_url', 'rand_booking'));
     }
 
-    public function indexUser()
-    {
-        if (is_null($this->user) || !$this->user->can('dashboard_user.view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view dashboard !');
-        } else if (!$this->user->hasRole('user')) {
-            return redirect()->route('admin.dashboard');
-        }
-
-        $total_room_book = OrderRooms::where(OrderRooms::STATUS, OrderRooms::STATUS_APPROVE)
-            ->where(OrderRooms::ID_USER, $this->user->id)
-            ->count();
-        $total_room_done = OrderRooms::where(OrderRooms::STATUS, OrderRooms::STATUS_DONE)
-            ->where(OrderRooms::ID_USER, $this->user->id)
-            ->count();
-        $total_gallery_book = OrderGallery::where(OrderGallery::STATUS, OrderGallery::STATUS_APPROVE)
-            ->where(OrderGallery::ID_USER, $this->user->id)
-            ->count();
-        $total_gallery_done = OrderGallery::where(OrderGallery::STATUS, OrderGallery::STATUS_DONE)
-            ->where(OrderGallery::ID_USER, $this->user->id)
-            ->count();
-
-        $last_order_rooms = OrderRooms::with('room')
-            ->where(OrderRooms::ID_USER, $this->user->id)
-            ->orderBy(OrderRooms::CREATED_AT, 'DESC')
-            ->limit(5)
-            ->get();
-        $last_order_gallery = OrderGallery::with('gallery')
-            ->where(OrderGallery::ID_USER, $this->user->id)
-            ->orderBy(OrderGallery::CREATED_AT, 'DESC')
-            ->limit(5)
-            ->get();
-
-        return view('backend.pages.dashboard-user.index', compact('total_room_book', 'total_room_done', 'total_gallery_book', 'total_gallery_done', 'last_order_rooms', 'last_order_gallery'));
-    }
-
     public function qrcode(Request $request)
     {
         if (isset($request->url)) {

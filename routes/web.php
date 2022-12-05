@@ -53,7 +53,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('users', 'Backend\UsersController', ['names' => 'admin.users']);
     Route::resource('admins', 'Backend\AdminsController', ['names' => 'admin.admins']);
     Route::resource('hakakses', 'Backend\HakaksionsController', ['names' => 'admin.hakaksions']);
-    Route::resource('gallery', 'Backend\GalleryController', ['names' => 'admin.gallery']);
     Route::resource('activitylog', 'Backend\ActivitylogController', ['names' => 'admin.activitys']);
     //Route::get('/activitylog', [App\Http\Controllers\Backend\SettingController::class, 'index']);
 
@@ -66,13 +65,18 @@ Route::group(['prefix' => 'admin'], function () {
      * Routes Rooms (ruangan)
      */
     Route::resource('rooms', 'Backend\RoomsController', ['names' => 'admin.rooms']);
+
+    /**
+     * Routes Gallery
+     */
+    Route::resource('gallery', 'Backend\GalleryController', ['names' => 'admin.gallery']);
 });
 
 /**
  * User routes
  */
 Route::group(['prefix' => 'user'], function () {
-    Route::get('/', 'Backend\DashboardController@indexUser')->name('user.dashboard');
-    Route::get('/rooms', 'Backend\OrderRoomsController@index')->name('user.rooms');
-    Route::get('/gallery', 'Backend\OrderGalleryController@index')->name('user.gallery');
+    Route::get('/', 'User\DashboardController@index')->name('user.dashboard');
+    Route::get('/rooms', 'User\OrderRoomsController@index')->name('user.rooms');
+    Route::get('/gallery', 'User\OrderGalleryController@index')->name('user.gallery');
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order\OrderRooms;
@@ -40,6 +40,6 @@ class OrderRoomsController extends Controller
         }
 
         $rooms = Rooms::with('lantai')->orderBy('id', 'asc')->get();
-        return view('backend.pages.order-rooms.index', compact('rooms'));
+        return view('backend.pages.order-rooms-user.index', compact('rooms'));
     }
 }
